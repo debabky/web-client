@@ -2,7 +2,10 @@
   <div v-if="isAppInitialized" class="app__container">
     <app-navbar class="app__navbar" />
     <router-view v-slot="{ Component, route }">
-      <transition :name="route.meta.transition || 'fade'" mode="out-in">
+      <transition
+        :name="route.meta.transition as string || 'fade'"
+        mode="out-in"
+      >
         <component class="app__main" :is="Component" />
       </transition>
     </router-view>
@@ -57,6 +60,8 @@ init()
   display: grid;
   grid-template-rows: toRem(85) 1fr max-content;
   flex: 1;
+  max-width: var(--large-page);
+  margin: auto;
 
   @include respond-to(small) {
     grid-template-rows: max-content 1fr max-content;

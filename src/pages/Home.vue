@@ -3,7 +3,6 @@
     <template v-if="list.length">
       <vote-card-list :payload="list" />
     </template>
-    <qr-auth-modal :is-shown="isModalShown" />
   </div>
 </template>
 

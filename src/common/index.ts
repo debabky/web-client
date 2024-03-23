@@ -10,6 +10,7 @@ export { default as VoteCard } from './VoteCard.vue'
 export { default as VoteCardList } from './VoteCardList.vue'
 export { default as AppNavbar } from './AppNavbar.vue'
 export { default as Modal } from './Modal.vue'
+export { default as Optionitem } from './Optionitem.vue'
 
 export * from './modals'
 export * from './loaders'

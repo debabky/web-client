@@ -130,4 +130,6 @@
     var(--field-padding-left);
 
   --field-error: var(--error-main);
+
+  --large-page: #{toRem(1400)}
 }

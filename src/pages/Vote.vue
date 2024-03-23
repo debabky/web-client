@@ -1,39 +1,55 @@
 <template>
   <div class="vote">
-    <div class="vote__list--selected">
-      <template v-for="option in selectedList" :key="option.id">
-        <optionitem
-          class="vote__option"
-          :item="option"
-          @toggle-state="toggleItem"
-        />
-      </template>
+    <div class="vote__list-wrp">
+      <h4 class="vote__title">
+        {{ $t('vote.selected-part-title') }}
+      </h4>
+      <div class="vote__list">
+        <template v-for="option in selectedList" :key="option.id">
+          <optionitem
+            class="vote__option"
+            :item="option"
+            @toggle-state="toggleItem"
+          />
+        </template>
+      </div>
     </div>
 
-    <div class="vote__list">
-      <template v-for="option in items" :key="option.item.id">
-        <optionitem
-          v-if="!option.isSelected"
-          class="vote__option"
-          :item="option.item"
-          @toggle-state="toggleItem"
-        />
-      </template>
-      <div />
+    <div class="vote__list-wrp">
+      <h4 class="vote__title">
+        {{ $t('vote.all-items-title') }}
+      </h4>
+      <div class="vote__list">
+        <template v-for="option in items" :key="option.item.id">
+          <optionitem
+            v-if="!option.isSelected"
+            class="vote__option"
+            :item="option.item"
+            @toggle-state="toggleItem"
+          />
+        </template>
+      </div>
     </div>
 
-    <app-button @click="vote" />
+    <qr-auth-modal :is-shown="isModalShown" />
+
+    <app-button
+      class="vote__btn"
+      :text="$t('vote.vote-btn-txt')"
+      :disabled="!isSelectedAll"
+      @click="vote"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { VoteOption, VotePayload } from '@/types'
-import {AppButton, Optionitem} from '@/common'
-import { ErrorHandler, postVote } from '@/helpers'
+import { AppButton, Optionitem, QrAuthModal } from '@/common'
+import { ErrorHandler, getVotingById, getVotingList } from '@/helpers'
 
 const props = defineProps<{
-  votingId: string | number
+  id: string | number
 }>()
 
 const options = [
@@ -94,7 +110,12 @@ const items = ref<
   }[]
 >([])
 
+const isModalShown = ref(false)
 const selectedList = ref<VoteOption[]>([])
+
+const isSelectedAll = computed(
+  () => items.value.length === selectedList.value.length,
+)
 
 const toggleItem = (id: string | number) => {
   const foundItem = items.value.find(obj => obj.item.id === id)
@@ -112,6 +133,8 @@ const toggleItem = (id: string | number) => {
 }
 
 const vote = async () => {
+  isModalShown.value = true
+
   try {
     const data = selectedList.value.map(
       (vote, id) => ({ votingOption: vote.id, rank: id } as VotePayload),
@@ -120,12 +143,14 @@ const vote = async () => {
     console.log(data.toString())
     const dataJson = JSON.parse(data.toString())
 
-    await postVote(data)
+    // await postVote(data)
   } catch (error) {
     ErrorHandler.process(error)
   }
 }
-const init = () => {
+const init = async () => {
+  const { data } = await getVotingById(props.id)
+
   items.value = options.map(option => ({
     item: option,
     isSelected: false,
@@ -138,17 +163,25 @@ init()
 
 <style scoped lang="scss">
 .vote__list {
-  display: flex;
-  background: #7b6eff;
-
-  &--selected {
-    display: flex;
-    background: #5cc56e;
-  }
+  display: grid;
+  grid-template-columns: repeat(4, minmax(toRem(100), 1fr));
+  gap: toRem(30);
+  margin-bottom: toRem(50);
+  background: var(--background-primary-dark);
+  padding: toRem(32);
+  border-radius: toRem(16);
 }
 
 .vote__option {
   width: 100%;
-  max-width: toRem(100);
+}
+
+.vote__btn {
+  max-width: toRem(150);
+  width: 100%;
+}
+
+.vote__title {
+  margin-bottom: toRem(16);
 }
 </style>
