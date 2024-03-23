@@ -148,6 +148,7 @@ const vote = async () => {
     ErrorHandler.process(error)
   }
 }
+
 const init = async () => {
   const { data } = await getVotingById(props.id)
 

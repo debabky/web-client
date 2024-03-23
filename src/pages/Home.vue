@@ -7,12 +7,11 @@
 </template>
 
 <script setup lang="ts">
-import { VoteCardList, QrAuthModal } from '@/common'
+import { VoteCardList } from '@/common'
 import { ref } from 'vue'
 import { getVotingList } from '@/helpers/vote.helpers'
 
 const list = ref<[]>([])
-const isModalShown = ref(false)
 const init = async () => {
   const data = await getVotingList()
   console.log(data)
