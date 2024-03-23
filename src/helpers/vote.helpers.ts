@@ -1,22 +1,17 @@
 import { api } from '@/api'
-import { VotePayload, VotingListResponse, VotingResponse } from '@/types'
+import { VotePayload, VotingResponse } from '@/types'
 import { JsonApiBodyBuilder } from '@distributedlab/jac'
 
-export const getVotingList = async () =>
-  api.get<VotingListResponse>('/integrations/voting-svc/voting/list')
+export const getVotingList = async () => api.get('/voting')
 
-export const getVotingById = async (voteId: number | string) =>
-  api.get<VotingListResponse>(`/integrations/voting-svc/voting/list/${voteId}`)
-
-export const postVote = async (vote: VotePayload) => {
+export const postVote = async (vote: string) => {
   const body = new JsonApiBodyBuilder()
     .setData({
-      type: 'vote',
-      attributes: vote,
+      vote,
     })
     .build()
 
-  return api.post<VotingResponse>('/integrations/voting-svc/voting/vote', {
+  return api.post<VotingResponse>('/voting/vote', {
     body,
   })
 }

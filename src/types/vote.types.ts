@@ -1,7 +1,5 @@
 export type VotePayload = {
-  votingId: string
   votingOption: string
-  nullifier: string
   rank: number
 }
 
@@ -10,4 +8,26 @@ export type Voting = {
   description: string
   createdAt: string
   activeUntil: string
+}
+
+export type VoteOptions = {
+  included: [
+    {
+      id: string
+      type: string
+      attributes: {
+        name: string
+        voting_id: string
+      }
+    },
+  ]
+}
+
+export type VoteOption = {
+  id: string
+  type: string
+  attributes: {
+    name: string
+    voting_id: string
+  }
 }

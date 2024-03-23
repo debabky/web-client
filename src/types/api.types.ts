@@ -1,4 +1,5 @@
-import { Voting } from '@/types'
+import { VoteOptions, Voting } from '@/types'
+import { JsonApiRecord } from '@distributedlab/jac'
 
 export type JsonApiRelationship = Record<string, unknown>
 export type Uuid = string
@@ -13,6 +14,11 @@ export type JsonApiRecordBase<T extends string> = {
   relationship_names?: JsonApiRelationships
 }
 
-export type VotingListResponse = JsonApiRecordBase<'vote'> & Voting[]
+export type VotingListResponse = JsonApiRecordBase<'vote'> &
+  Voting[] &
+  VoteOptions
 
-export type VotingResponse = JsonApiRecordBase<'vote'> & Voting
+export type VotingResponse = JsonApiRecordBase<'vote'> &
+  JsonApiRecord &
+  Voting &
+  VoteOptions
