@@ -12,14 +12,24 @@
         </div>
       </div>
 
-      <div class="vote__list">
-        <template v-for="option in selectedList" :key="option.id">
-          <optionitem
-            class="vote__option"
-            :item="option"
-            @toggle-state="toggleItem"
-          />
-        </template>
+      <div class="vote__list--wrp">
+        <div class="vote__list--selected">
+          <template v-for="place in laybels" :key="place">
+            <p class="vote__selected-item">
+              {{ place }}
+            </p>
+          </template>
+        </div>
+
+        <div class="vote__list--selected">
+          <template v-for="option in selectedList" :key="option.id">
+            <optionitem
+              class="vote__option vote__selected-item"
+              :item="option"
+              @toggle-state="toggleItem"
+            />
+          </template>
+        </div>
       </div>
     </div>
 
@@ -46,7 +56,12 @@
       @click="vote"
     />
 
-    <qr-auth-modal v-model:is-shown="isModalShown" :nonce="nonce" />
+    <qr-auth-modal
+      v-model:is-shown="isModalShown"
+      :nonce="nonce"
+      :voting-id="votingInfo?.options[0]?.attributes.votingId ?? ''"
+      :options="voteOptions"
+    />
   </div>
 </template>
 
@@ -54,8 +69,7 @@
 import { computed, ref } from 'vue'
 import { VoteOptions, Voting } from '@/types'
 import { AppButton, Optionitem, QrAuthModal } from '@/common'
-import { auth, ErrorHandler, getVotingById, postVote, sleep } from '@/helpers'
-import { poseidon } from '@big-whale-labs/poseidon'
+import { auth, ErrorHandler, getVotingById, sleep } from '@/helpers'
 import { useI18n } from 'vue-i18n'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -66,6 +80,7 @@ const props = defineProps<{
 const { t } = useI18n()
 
 const votingInfo = ref<Voting | null>(null)
+
 const items = ref<
   {
     item: VoteOptions
@@ -73,10 +88,10 @@ const items = ref<
   }[]
 >([])
 
+const voteOptions = ref<{ votingOption: number; rank: number }[]>([])
 const isModalShown = ref(false)
 const selectedList = ref<VoteOptions[]>([])
-const nonce = ref('2a7dc999-5967-415e-ab49-50e32ec6ec15')
-
+const nonce = ref('')
 const payload = computed(() => [
   {
     lbl: t('vote-card.name-lbl'),
@@ -90,6 +105,12 @@ const payload = computed(() => [
     lbl: t('vote-card.active-until-lbl'),
     value: votingInfo.value?.activeUntil ?? '',
   },
+])
+
+const laybels = computed(() => [
+  t('vote-card.first-place'),
+  t('vote-card.second-place'),
+  t('vote-card.third-place'),
 ])
 
 const isSelectedAll = computed(
@@ -115,19 +136,12 @@ const vote = async () => {
   isModalShown.value = true
 
   try {
-    const data = selectedList.value.map(vote => ({
-      votingOption: vote.attributes.name,
+    voteOptions.value = selectedList.value.map((vote, id) => ({
+      votingOption: vote.attributes.id,
+      rank: id + 1,
     }))
 
-    const ids = selectedList.value.map(item => item.attributes.id)
-
-    const hash = poseidon(ids)
-    const authResp = await validate()
-
-    await postVote(
-      data,
-      'Bearer ' + authResp?.data?.accessToken?.token ?? 'test',
-    )
+    await validate()
   } catch (error) {
     ErrorHandler.process(error)
   }
@@ -151,7 +165,7 @@ const init = async () => {
     isSelected: false,
   }))
 
-  // nonce.value = uuidv4()
+  nonce.value = uuidv4()
 
   items.value = list
 }
@@ -160,6 +174,10 @@ init()
 </script>
 
 <style scoped lang="scss">
+.vote {
+  min-width: toRem(1280);
+}
+
 .vote__list {
   display: grid;
   grid-template-columns: repeat(4, minmax(toRem(100), 1fr));
@@ -168,6 +186,26 @@ init()
   background: var(--background-primary-dark);
   padding: toRem(32);
   border-radius: toRem(16);
+
+  &--selected {
+    margin: toRem(25) 0;
+    background: var(--background-primary-dark);
+    padding: toRem(32);
+    border-radius: toRem(16);
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    gap: toRem(30);
+  }
+}
+
+.vote__selected-item {
+  min-height: toRem(50);
+}
+
+.vote__list--wrp {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  gap: toRem(50);
 }
 
 .vote__option {

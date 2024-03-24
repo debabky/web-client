@@ -30,6 +30,12 @@
   "vote-card": {
     "name-lbl": "Name",
     "created-at-lbl": "Created at",
-    "active-until-lbl": "Active until"
+    "active-until-lbl": "Active until",
+    "first-place": "First choice",
+    "second-place": "Second choice",
+    "third-place": "Third choice"
+  },
+  "home": {
+    "title": "Voting platform"
   }
 }

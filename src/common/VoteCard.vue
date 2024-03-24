@@ -1,11 +1,19 @@
 <template>
   <div class="vote-item">
     <div v-for="field in payload" class="vote-card__payload" :key="field.lbl">
-      <p>{{ field.lbl }}</p>
-      <p>{{ field.value }}</p>
+      <p class="vote-item__lbl">
+        {{ field.lbl }}
+      </p>
+      <p class="vote-item__value">
+        {{ field.value }}
+      </p>
     </div>
 
-    <app-button :text="$t('vote-card.select-btn-txt')" @click="select" />
+    <app-button
+      class="vote-card__btn"
+      :text="$t('vote-card.select-btn-txt')"
+      @click="select"
+    />
   </div>
 </template>
 
@@ -49,10 +57,23 @@ const select = () => {
 .vote-item {
   padding: toRem(16);
   display: grid;
-  border-radius: solid toRem(1) var(--background-primary-main);
+  border-radius: toRem(16);
+  border: solid toRem(3) var(--background-primary-dark);
 }
 
 .vote-card__payload {
   display: grid;
+}
+
+.vote-card__btn {
+  margin: toRem(16) auto;
+}
+
+.vote-item__lbl {
+  color: var(--text-primary-light);
+}
+
+.vote-item__value {
+  color: var(--text-secondary-invert-dark);
 }
 </style>

@@ -1,5 +1,5 @@
 import { api } from '@/api'
-import { VotePayload, VotingListResponse, VotingResponse } from '@/types'
+import { VotingListResponse, VotingResponse } from '@/types'
 import { JsonApiBodyBuilder } from '@distributedlab/jac'
 
 export const getVotingList = async () =>
@@ -16,7 +16,7 @@ export const postVote = async (
     .setData({
       type: 'revoke-admin',
       attributes: {
-        data: vote,
+        votes: vote.map(i => ({ voting_option: i.votingOption })),
       },
     })
     .build()

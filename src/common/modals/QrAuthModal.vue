@@ -14,16 +14,27 @@ import { ref } from 'vue'
 const props = defineProps<{
   isShown: boolean
   nonce: string
+  options: { votingOption: number; rank: number }[]
+  votingId: string
 }>()
 
 const qr = ref('')
-const genQr = async (text: string) => {
-  return QRCode.toDataURL(text)
-}
+const genQr = async (text: string) =>
+  QRCode.toDataURL(text, {
+    color: {
+      dark: '#B388EB',
+      light: '#FFD2F9',
+    },
+  })
 
 const init = async () => {
-  console.log(props.nonce)
-  qr.value = await genQr(JSON.stringify({ nonce: props.nonce, url: '' }))
+  qr.value = await genQr(
+    JSON.stringify({
+      session_uuid: props.nonce,
+      voting_id: props.votingId,
+      options: props.options,
+    }),
+  )
 }
 
 init()
@@ -36,10 +47,8 @@ init()
   height: 100%;
   max-width: toRem(500);
   max-height: toRem(500);
-  background: var(--background-primary-main);
+  background: var(--background-primary-dark);
   border-radius: toRem(24);
-
-  // padding: 3%; for mobile
 }
 
 .qr-auth-modal__img {

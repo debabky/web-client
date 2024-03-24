@@ -93,3 +93,11 @@
   font-style: italic;
   font-display: swap;
 }
+
+@font-face {
+  font-family: 'Tauri';
+  src: local('Tauri'), url('./Tauri/Tauri-Regular.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}

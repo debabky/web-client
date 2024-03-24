@@ -1,5 +1,4 @@
-import { VoteOptions, Voting } from '@/types'
-import { JsonApiRecord } from '@distributedlab/jac'
+import { Voting } from '@/types'
 
 export type JsonApiRelationship = Record<string, unknown>
 export type Uuid = string
