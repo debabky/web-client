@@ -33,7 +33,8 @@
     "active-until-lbl": "Active until",
     "first-place": "First choice",
     "second-place": "Second choice",
-    "third-place": "Third choice"
+    "third-place": "Third choice",
+    "select-btn-txt": "Select"
   },
   "home": {
     "title": "Voting platform"

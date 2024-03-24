@@ -67,6 +67,7 @@ const select = () => {
 
 .vote-card__btn {
   margin: toRem(16) auto;
+  width: 100%;
 }
 
 .vote-item__lbl {

@@ -69,7 +69,14 @@
 import { computed, ref } from 'vue'
 import { VoteOptions, Voting } from '@/types'
 import { AppButton, Optionitem, QrAuthModal } from '@/common'
-import { auth, ErrorHandler, getVotingById, sleep } from '@/helpers'
+import {
+  auth,
+  bus,
+  BUS_EVENTS,
+  ErrorHandler,
+  getVotingById,
+  sleep,
+} from '@/helpers'
 import { useI18n } from 'vue-i18n'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -146,6 +153,8 @@ const vote = async () => {
   }
 
   await validate()
+  isModalShown.value = false
+  bus.emit(BUS_EVENTS.success)
 }
 
 const validate = async () => {

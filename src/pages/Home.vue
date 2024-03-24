@@ -43,10 +43,10 @@ init()
 
 .home-page__title {
   text-align: center;
-  margin-bottom: toRem(16);
+  margin: toRem(50) 0;
 }
 
 .home-page__list {
-  margin: auto;
+  margin: toRem(100) auto;
 }
 </style>

@@ -45,14 +45,14 @@ watch(props, init)
   display: grid;
   width: 100%;
   height: 100%;
-  max-width: toRem(500);
-  max-height: toRem(500);
+  max-width: toRem(400);
+  max-height: toRem(400);
   background: var(--background-primary-dark);
   border-radius: toRem(24);
 }
 
 .qr-auth-modal__img {
   margin: auto;
-  width: 50%;
+  width: 80%;
 }
 </style>
