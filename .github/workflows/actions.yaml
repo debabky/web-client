@@ -31,3 +31,5 @@ jobs:
         run: |
           . $(werf ci-env github --as-file)
           werf export web --tag ghcr.io/debabky/web-client:$GITHUB_SHA
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --tag ghcr.io/debabky/web-client && docker push ghcr.io/debabky/web-client
