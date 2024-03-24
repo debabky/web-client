@@ -140,19 +140,20 @@ const vote = async () => {
       votingOption: vote.attributes.id,
       rank: id + 1,
     }))
-
-    await validate()
   } catch (error) {
     ErrorHandler.process(error)
+    return
   }
+
+  await validate()
 }
 
 const validate = async () => {
   try {
-    return auth(nonce.value)
-  } catch (error) {
-    await sleep(1000)
+    await sleep(5000)
     await auth(nonce.value)
+  } catch (error) {
+    await validate()
   }
 }
 

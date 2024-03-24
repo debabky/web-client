@@ -9,7 +9,7 @@
 <script setup lang="ts">
 import * as QRCode from 'qrcode'
 import { Modal } from '@/common'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 
 const props = defineProps<{
   isShown: boolean
@@ -37,7 +37,7 @@ const init = async () => {
   )
 }
 
-init()
+watch(props, init)
 </script>
 
 <style scoped lang="scss">
