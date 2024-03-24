@@ -1,12 +1,12 @@
 <template>
   <div class="option-item">
-    <p>{{ item.id }}</p>
+    <p>{{ item.attributes.name }}</p>
     <app-button :text="$t('option-item.toggle-btn-txt')" @click="toggle" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { VoteOption } from '@/types'
+import { VoteOptions } from '@/types'
 import { AppButton } from '@/common'
 
 const emit = defineEmits<{
@@ -14,7 +14,7 @@ const emit = defineEmits<{
 }>()
 
 const props = defineProps<{
-  item: VoteOption
+  item: VoteOptions
 }>()
 
 const toggle = () => {

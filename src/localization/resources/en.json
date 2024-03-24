@@ -26,5 +26,10 @@
     "vote-btn-txt": "Vote",
     "selected-part-title": "Selected items",
     "all-items-title": "All options"
+  },
+  "vote-card": {
+    "name-lbl": "Name",
+    "created-at-lbl": "Created at",
+    "active-until-lbl": "Active until"
   }
 }

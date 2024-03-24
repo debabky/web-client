@@ -35,6 +35,13 @@
   resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.24.1.tgz#1e416d3627393fab1cb5b0f2f1796a100ae9133a"
   integrity sha512-Zo9c7N3xdOIQrNip7Lc9wvRPzlRtovHVE4lkz8WEDr7uYh/GMQhSiIgFxGIArRHYdJE5kxtZjAf8rT0xhdLCzg==
 
+"@big-whale-labs/poseidon@^0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@big-whale-labs/poseidon/-/poseidon-0.0.5.tgz#38aee33760bf7a532c570cbbe572e35d9a577f26"
+  integrity sha512-Gen4qMrQl85tXg1VWBFaqUS3KylqYPoQOMy5OzQjcDTfazbUyxuB0fNVOVavKg1L2nkoF2zqQoQgPIiySuOTag==
+  dependencies:
+    big-integer "^1.6.51"
+
 "@csstools/css-parser-algorithms@^2.3.1":
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/@csstools/css-parser-algorithms/-/css-parser-algorithms-2.6.1.tgz#c45440d1efa2954006748a01697072dae5881bcd"
@@ -873,6 +880,11 @@ base@^0.11.1:
     isobject "^3.0.1"
     mixin-deep "^1.2.0"
     pascalcase "^0.1.1"
+
+big-integer@^1.6.51:
+  version "1.6.52"
+  resolved "https://registry.yarnpkg.com/big-integer/-/big-integer-1.6.52.tgz#60a887f3047614a8e1bffe5d7173490a97dc8c85"
+  integrity sha512-QxD8cf2eVqJOOz63z6JIN9BzvVs/dlySa5HGSBH5xtR8dPteIRQnBxxKqkNTiT6jbDTF6jAfrd4oMcND9RGbQg==
 
 big.js@^5.2.2:
   version "5.2.2"

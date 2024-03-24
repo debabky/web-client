@@ -9,11 +9,11 @@
 <script setup lang="ts">
 import * as QRCode from 'qrcode'
 import { Modal } from '@/common'
-import { v4 as uuid } from 'uuid'
 import { ref } from 'vue'
 
-defineProps<{
+const props = defineProps<{
   isShown: boolean
+  nonce: string
 }>()
 
 const qr = ref('')
@@ -22,9 +22,8 @@ const genQr = async (text: string) => {
 }
 
 const init = async () => {
-  const id = uuid()
-
-  qr.value = await genQr(JSON.stringify({ nonce: id, url: '' }))
+  console.log(props.nonce)
+  qr.value = await genQr(JSON.stringify({ nonce: props.nonce, url: '' }))
 }
 
 init()

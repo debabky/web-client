@@ -14,11 +14,6 @@ export type JsonApiRecordBase<T extends string> = {
   relationship_names?: JsonApiRelationships
 }
 
-export type VotingListResponse = JsonApiRecordBase<'vote'> &
-  Voting[] &
-  VoteOptions
+export type VotingListResponse = JsonApiRecordBase<'vote'> & Voting[]
 
-export type VotingResponse = JsonApiRecordBase<'vote'> &
-  JsonApiRecord &
-  Voting &
-  VoteOptions
+export type VotingResponse = JsonApiRecordBase<'vote'> & Voting
