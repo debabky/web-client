@@ -5,15 +5,8 @@
     <app-button
       class="app-navbar__link"
       :scheme="'flat'"
-      :text="$routes.uiKit"
-      :route="{ name: $routes.uiKit }"
-    />
-
-    <app-button
-      class="app-navbar__link"
-      :scheme="'flat'"
-      :text="$routes.complexForm"
-      :route="{ name: $routes.complexForm }"
+      :text="$routes.home"
+      :route="{ name: $routes.home }"
     />
   </div>
 </template>

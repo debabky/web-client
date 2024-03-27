@@ -4,8 +4,8 @@ $black: #000000;
 $black-rgb: hexToRGB($black);
 
 $background-primary-light: #ffffff;
-$background-primary-main: #fbfcff;
-$background-primary-dark: #f5f6ff;
+$background-primary-main: #FFE7F1;
+$background-primary-dark: #FFD2F9;
 
 $background-secondary-light: #eff2ff;
 $background-secondary-main: #dfe5f8;
@@ -31,8 +31,8 @@ $info-dark: #0094cc;
 
 /* brand colors */
 
-$primary-light: #e2ecfc;
-$primary-main: #01579b;
+$primary-light: #F7AEF8;
+$primary-main: #B388EB;
 $primary-dark: #054679;
 
 $primary-light-rgb: hexToRGB($primary-light);
@@ -58,8 +58,8 @@ $text-primary-invert-main: #fbfcff;
 $text-primary-invert-dark: #fbfbff;
 
 $text-secondary-invert-light: rgba(#fffbfe, 0.5);
-$text-secondary-invert-main: rgba(#fffbfe, 0.5);
-$text-secondary-invert-dark: rgba(#fffbfe, 0.5);
+$text-secondary-invert-main: rgba(#A587DA, 0.5);
+$text-secondary-invert-dark: rgba(#A56FFF, 0.5);
 
 /* border colors */
 

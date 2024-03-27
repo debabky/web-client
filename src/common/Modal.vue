@@ -69,7 +69,8 @@ $z-index-local: 100;
   align-items: center;
   justify-content: center;
   position: relative;
-  height: auto;
+  height: 100%;
+  width: 100%;
   max-width: var(--max-width);
 }
 

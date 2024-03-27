@@ -31,7 +31,7 @@ yarn rsc %release-version%
 ```
 
 ### Dealing with env variables
-Env variables can be rewritten by [env.is] (./static/env.js) file in runtime. To do so, we need to provide same [env variables](.env.example) there in json format
+Env variables can be rewritten by [env.is] (./static/env.js) file in runtime. To do so, we need to provide same [env variables](.env.local) there in json format
 
 ## Some additional features
 

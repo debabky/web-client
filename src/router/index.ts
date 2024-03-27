@@ -13,6 +13,17 @@ const routes: Array<RouteRecordRaw> = [
     path: '/:catchAll(.*)',
     redirect: { name: ROUTE_NAMES.home },
   },
+  {
+    path: '/home',
+    name: ROUTE_NAMES.home,
+    component: () => import('@/pages/Home.vue'),
+  },
+  {
+    path: '/vote/:id',
+    name: ROUTE_NAMES.vote,
+    component: () => import('@/pages/Vote.vue'),
+    props: true,
+  },
 ]
 
 const router = createRouter({
